@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 3.16)
+project(roku)
+set(CMAKE_C_COMPILER "g++-10")
+set(CMAKE_CXX_STANDARD 20)
+INCLUDE_DIRECTORIES( ${Boost_INCLUDE_DIR} )
+add_executable(roku main.cpp BufferTunnel.cpp BufferTunnel.h utils.h utils.cpp unicode_conv.h unicode_conv.cpp)
+TARGET_LINK_LIBRARIES( roku LINK_PUBLIC ${Boost_LIBRARIES} )
