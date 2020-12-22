@@ -41,6 +41,8 @@ namespace roku::utils {
     int ngram_next(const char32_t *ustr, const char32_t *ustr_end,
                    unsigned int n, const char32_t **start);
 
+    std::vector<std::string> get_ngram_groups(const std::u32string &str, unsigned int n);
+
     void loop_utf32(std::u32string &u32str, std::function<void(char32_t)> func);
 
 }
