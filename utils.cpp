@@ -3,6 +3,7 @@
 //
 #include <codecvt>
 #include "utils.h"
+#include "unicode_conv.h"
 
 int roku::utils::wiser_is_ignored_char(const char32_t ustr) {
     switch (ustr) {
@@ -77,4 +78,26 @@ int roku::utils::ngram_next(const char32_t *ustr, const char32_t *ustr_end,
 
     *start = ustr;
     return p - ustr;
+}
+
+
+std::vector<std::string> roku::utils::get_ngram_groups(const std::u32string &str, unsigned int n) {
+    std::vector<std::string> ngram_groups{};
+    for (auto it = str.begin(); it != str.end(); ++it) {
+        if (wiser_is_ignored_char(*it))
+            continue;
+
+        std::array<char, 4> u8char;
+        roku::unicode::ConvChU32ToU8(*it, u8char);
+
+
+        std::array<char, 4> u8char2;
+        auto forward_it = it;
+        ++forward_it;
+        roku::unicode::ConvChU32ToU8(*forward_it, u8char2);
+
+        ngram_groups.push_back(std::string{u8char.data()} + std::string{u8char2.data()});
+    }
+
+    return ngram_groups;
 }
