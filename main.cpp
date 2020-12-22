@@ -4,7 +4,7 @@
 
 int main() {
 
-    std::string test{"test"};
+    std::string test{"   \n \t   ++ -- test"};
     roku::BufferTunnel<std::string, std::string> tunnel{test};
 
     std::u32string u32String{};
